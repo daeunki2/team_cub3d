@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:22:44 by rgrochow          #+#    #+#             */
-/*   Updated: 2025/04/30 01:50:45 by rgrochow         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:33:55 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	clear_game(t_game *game)
 			free(game->map.grid[i++]);
 		free(game->map.grid);
 	}
+	parsing_free(game);
 	i = 0;
 	while (i < 4)
 	{
@@ -38,4 +39,11 @@ void	clear_game(t_game *game)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		(mlx_destroy_display(game->mlx), free(game->mlx));
+}
+
+void parsing_free(t_game *game)
+{
+	if (game->copied_map)
+		free_split(game->copied_map);
+	free(game->big_line);
 }

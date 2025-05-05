@@ -1,8 +1,23 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/05 12:39:27 by daeunki2          #+#    #+#              #
+#    Updated: 2025/05/05 13:44:24 by daeunki2         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 CC = cc
 SRC_DIR = src
 OBJ_DIR = obj
-CFLAGS = -Wall -Wextra -Werror -I includes
+MLX_DIR = mlx_linux
+MINILIBX_LIB = $(MLX_DIR)/libmlx.a
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I includes
+LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lXfixes -lm
 
 SRCS_LIST = main.c \
 			game/init.c game/events.c game/render.c game/loop.c game/minimap.c game/clear.c game/utils.c\
@@ -21,18 +36,27 @@ all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@$(CC) $(CFLAGS) -I/usr/include -I$(MLX_DIR) -O3 -c $< -o $@ > /dev/null 2>&1
 
 $(NAME): $(OBJS)
+	@echo "Building $(NAME) 🛠️"
+	@make -C $(MLX_DIR) > /dev/null 2>&1
 	@rm -f $(HOME)/.valgrind.supp && \
-	printf '{\n   X11 writev false positive\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n   obj:/usr/lib/x86_64-linux-gnu/libxcb.so.*\n}' > $(HOME)/.valgrind.supp
+		printf '{\n   X11 writev false positive\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n   obj:/usr/lib/x86_64-linux-gnu/libxcb.so.*\n}' > $(HOME)/.valgrind.supp
 	@grep -q 'VALGRIND_OPTS' $(HOME)/.bashrc || echo 'export VALGRIND_OPTS="--suppressions=$$HOME/.valgrind.supp"' >> $(HOME)/.bashrc
-	@$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) > /dev/null 2>&1
+	@echo "Build Complete! ✅"  
+
 clean:
-	rm -rf $(OBJ_DIR)
+	@echo "Cleaning up 🧹🧹🧹"
+	@make -C $(MLX_DIR) clean > /dev/null 2>&1  # mlx clean output suppressed
+	@rm -rf $(OBJ_DIR)
+	@echo "cleaning ✅"
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "Cleaning Executables 🧹🧹🧹"
+	@rm -f $(NAME)
+	@echo "fclean ✅"
 
 re: fclean all
 

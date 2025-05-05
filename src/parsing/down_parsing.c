@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:13:50 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 16:22:41 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:58:54 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	down_parsing(t_game *info, int start)
 		if (flag != T_MAP)
 		{
 			if (is_end_map(info, start) != 0)
-				return(error_msg("no empty line in map"));
+				return(-1);
 			break;
 		}
 		width = component_check(info, info->copied_map[start]);
@@ -97,8 +97,10 @@ int is_end_map(t_game *info, int i)
 	while (info->copied_map[k] != NULL)
 	{
 		flag = ft_identifi(info->copied_map[k]);
-		if (flag != T_EMPTY)
-			return(-1);
+		if (T_NO <= flag && flag <= T_CEIL)
+			return(error_msg("map has to be last"));
+		else if (flag == T_MAP)
+			return(error_msg("no empty line"));
 		k++;		
 	}
 	return(0);

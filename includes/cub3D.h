@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:51:41 by rgrochow          #+#    #+#             */
-/*   Updated: 2025/05/04 18:48:53 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:27:15 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+#include <X11/extensions/Xfixes.h>
 # include <stdio.h>
 # include <string.h>
 
@@ -234,6 +235,7 @@ int		loop_hook(t_game *game);
 void	draw_minimap(t_game *game);
 /* clear.c */
 void	clear_game(t_game *game);
+void 	parsing_free(t_game *game);
 /* utils.c */
 void	calculate_wall_distance(t_game *game, t_ray *ray);
 void	choose_texture_number(t_ray *ray);

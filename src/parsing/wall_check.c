@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:18:05 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 18:33:14 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:38:20 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	set_player_pos(t_game *game, char **str)
 				game->player.pos_y= i + 0.049;
 				game->player.pos_x = j+ 0.049;
                 game->player.dir = str[i][j];
+				game->map.grid[i][j] = '0';
 			}
 			j++;
 		}
