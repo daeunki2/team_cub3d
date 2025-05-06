@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:00:56 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/06 14:37:30 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:13:05 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	up_parsing(t_game *info)
 int	info_check(t_game *info)
 {
 	if (info->textures[T_NO].count != 1)
-		return (error_msg("North file != 1"));
+		return (error_msg("Texture info must appear once above the map"));
 	if (info->textures[T_SO].count != 1)
-		return (error_msg("South file != 1"));
+		return (error_msg("Texture info must appear once above the map"));
 	if (info->textures[T_EA].count != 1)
-		return (error_msg("East file != 1"));
+		return (error_msg("Texture info must appear once above the map"));
 	if (info->textures[T_WE].count != 1)
-		return (error_msg("West file != 1"));
+		return (error_msg("Texture info must appear once above the map"));
 	if (info->ceiling_count != 1)
-		return (error_msg("ceil color != 1"));
+		return (error_msg("Color info must appear once above the map"));
 	if (info->floor_count != 1)
-		return (error_msg("floor color != 1"));
+		return (error_msg("Color info must appear once above the map"));
 	return (0);
 }
 
@@ -73,7 +73,7 @@ int	direction_path_check(t_game *info, int k, int nsew)
 	if (fd == -1)
 	{
 		free(tmp);
-		return (error_msg("can not open file"));
+		return (error_msg("Can not open file"));
 	}
 	close(fd);
 	info->textures[nsew].type = nsew;
