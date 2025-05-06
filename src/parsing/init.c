@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 12:47:29 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 14:24:23 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:36:25 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	set_game(t_game *info, char *av)
 {
 	info->file_fd = open(av, O_RDONLY);
 	if (info->file_fd < 0)
-		return (error_msg("Can not open map file."));
+		return (error_msg("Unable to open the map file."));
 	info->map_h = 0;
 	info->map_w = 0;
 	info->player_count = 0;
@@ -30,16 +30,6 @@ int	set_game(t_game *info, char *av)
 	set_tile(info);
 	return (0);
 }
-// typedef struct s_img
-// {
-// 	void	*img;
-// 	int		*data;
-// 	int		width;
-// 	int		height;
-// 	char	*path;
-// 	int		count;
-// 	int		type;
-// }	t_img;
 
 void	set_tile(t_game *info)
 {
@@ -55,3 +45,65 @@ void	set_tile(t_game *info)
 	}
 }
 
+static void	init_direction(t_game *game)
+{
+	if (game->player.dir == 'N')
+	{
+		game->player.dir_x = 0.0;
+		game->player.dir_y = -1.0;
+	}
+	else if (game->player.dir == 'S')
+	{
+		game->player.dir_x = 0.0;
+		game->player.dir_y = 1.0;
+	}
+	else if (game->player.dir == 'E')
+	{
+		game->player.dir_x = 1.0;
+		game->player.dir_y = 0.0;
+	}
+	else if (game->player.dir == 'W')
+	{
+		game->player.dir_x = -1.0;
+		game->player.dir_y = 0.0;
+	}
+}
+
+static void	init_plane(t_game *game)
+{
+	if (game->player.dir == 'N')
+	{
+		game->player.plane_x = 0.66;
+		game->player.plane_y = 0.0;
+	}
+	else if (game->player.dir == 'S')
+	{
+		game->player.plane_x = -0.66;
+		game->player.plane_y = 0.0;
+	}
+	else if (game->player.dir == 'E')
+	{
+		game->player.plane_x = 0.0;
+		game->player.plane_y = 0.66;
+	}
+	else if (game->player.dir == 'W')
+	{
+		game->player.plane_x = 0.0;
+		game->player.plane_y = -0.66;
+	}
+}
+
+int	set_map(t_game *game)
+{
+	dup_map(game);
+	if (game->map.grid == NULL)
+		return (error_msg("malloc fail set_game"));
+	if (surround_wall_check(game, game->map.grid) != 0)
+		return (-1);
+	set_player_pos(game, game->map.grid);
+	game->player.move_speed = 0.05;
+	game->player.rot_speed = 0.05;
+	init_direction(game);
+	init_plane(game);
+	return (0);
+}

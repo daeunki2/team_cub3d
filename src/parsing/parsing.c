@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:04:50 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 18:32:16 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:17:15 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ int	do_parsing(t_game *info, char *av)
 
 	info->file_fd = open(av, O_RDONLY);
 	if (info->file_fd < 0)
-		return (error_msg("Can not open map file."));// check fd.
-	if (file_format(av) != 0)// file format check
-		return(-1);
-	set_game(info, av);
-	if (read_map(info) != 0)// read file and store 
 		return (error_msg("Can not open map file."));
-	start = up_parsing(info);// check textuer color info, retrun start line of map.
+	if (file_format(av) != 0)
+		return (-1);
+	set_game(info, av);
+	if (read_map(info) != 0)
+		return (error_msg("Can not open map file."));
+	start = up_parsing(info);
 	if (start == -1)
 		return (-1);
-	last = down_parsing(info, start);// check map
+	last = down_parsing(info, start);
 	if (last == -1)
 		return (-1);
 	info->map_h = last - start;

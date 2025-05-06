@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:07:14 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 15:10:26 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:23:51 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,3 @@ int	file_format(char *file)
 		return (error_msg("file format *.cub"));
 	return (0);
 }
-
-// int map_empty(char *big_line)
-// {
-// 	int i;
-// 	int tmp;
-	
-// 	i = 0;
-// 	tmp = 0;
-// 	while (big_line[i] != '\0')
-// 	{
-// 		if (big_line[i] == '\n' && (big_line[i + 1] == ' ' || big_line[i + 1] == '\n'))
-// 		{
-// 			tmp = i;
-// 			while(big_line[i] == '\n' || big_line[i] == ' ')
-// 				i++;
-// 			if (ft_strchr("01NSEW ", big_line[tmp - 1]) != NULL && ft_strchr("01NSEW ", big_line[i]) != NULL)
-// 				return(error_msg("no empty line in map"));
-// 		}
-// 		tmp = 0;
-// 		i++;
-// 	}
-// 	return (0);
-// }

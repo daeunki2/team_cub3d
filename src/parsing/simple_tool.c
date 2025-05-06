@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 13:53:45 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 15:15:36 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:15:53 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_space(char c)
 
 int	ft_isdigit(char c)
 {
-	if ( '0' <= c || c <= '9')
+	if ('0' <= c || c <= '9')
 		return (1);
 	return (0);
 }

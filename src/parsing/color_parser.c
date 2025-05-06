@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:31:43 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 17:54:01 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:32:53 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ int	color_parser(t_game *info, int i, int type)
 	return (0);
 }
 
-
 int	init_color(int *color, char *ptr)
 {
-	int		r;
-	int		g;
-	int		b;
+	int	r;
+	int	g;
+	int	b;
 
 	r = 0;
 	g = 0;
@@ -61,9 +60,9 @@ int	init_color(int *color, char *ptr)
 	while (*ptr >= '0' && *ptr <= '9')
 		b = b * 10 + (*ptr++ - '0');
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return(error_msg("0 < color < 255"));
+		return (error_msg("0 < color < 255"));
 	*color = (r << 16) | (g << 8) | b;
-	return(0);
+	return (0);
 }
 
 int	color_component(char *line)
@@ -78,7 +77,7 @@ int	color_component(char *line)
 	while (line[i] != '\0')
 	{
 		if (ft_strchr("FC0123456789, \t\n", line[i]) == NULL)
-			return (error_msg("불순물 발견"));
+			return (error_msg("Invalid color component"));
 		if (line[i] == 'C' || line[i] == 'F')
 			a_count++;
 		if (line[i] == ',')
@@ -86,6 +85,6 @@ int	color_component(char *line)
 		i++;
 	}
 	if (a_count != 1 || d_count != 2)
-		return(error_msg("color component fail"));
+		return (error_msg("Invalid color format"));
 	return (0);
 }

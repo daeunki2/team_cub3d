@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:22:44 by rgrochow          #+#    #+#             */
-/*   Updated: 2025/05/05 13:33:55 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:21:09 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clear_game(t_game *game)
 		(mlx_destroy_display(game->mlx), free(game->mlx));
 }
 
-void parsing_free(t_game *game)
+void	parsing_free(t_game *game)
 {
 	if (game->copied_map)
 		free_split(game->copied_map);

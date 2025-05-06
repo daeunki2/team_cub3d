@@ -6,7 +6,7 @@
 /*   By: daeunki2 <daeunki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 14:00:56 by daeunki2          #+#    #+#             */
-/*   Updated: 2025/05/04 15:17:12 by daeunki2         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:37:30 by daeunki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	up_parsing(t_game *info)
 		if (type == T_MAP)
 			break ;
 		else if (type == T_ERROR)
-			return (error_msg("there is invalid component in map line"));
+			return (error_msg("Invalid line in map file"));
 		else if (type == T_EA || type == T_SO || type == T_NO || type == T_WE)
 		{
 			if (direction_path_check(info, i, type) != 0)
