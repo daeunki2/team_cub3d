@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		(printf("Usage: ./cub3D maps/<map_fileddddd>\n"), exit(0));
+		(printf("Usage: ./cub3D maps/*.cub\n"), exit(0));
 	ft_memset(&game, 0, sizeof(t_game));
 	if (do_parsing(&game, argv[1]) == -1)
 		parsing_error_out(&game);

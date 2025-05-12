@@ -73,7 +73,7 @@ int	direction_path_check(t_game *info, int k, int nsew)
 	if (fd == -1)
 	{
 		free(tmp);
-		return (error_msg("Can not open file"));
+		return (error_msg("Can not open texture file"));
 	}
 	close(fd);
 	info->textures[nsew].type = nsew;

@@ -24,7 +24,7 @@ int	do_parsing(t_game *info, char *av)
 		return (-1);
 	set_game(info, av);
 	if (read_map(info) != 0)
-		return (error_msg("Can not open map file."));
+		return (error_msg("Can not read map file."));
 	start = up_parsing(info);
 	if (start == -1)
 		return (-1);

@@ -61,9 +61,9 @@ fclean: clean
 re: fclean all
 
 norm:
-	@echo "Checking norminette for source files..."
-	@norminette $(addprefix $(SRC_DIR)/, $(SRCS_LIST)) includes/*.h || { echo "Norminette failed :( "; exit 1; }
-	@echo "no norm error!"
+	@echo "Running norminette on source and header files.."
+	@norminette $(addprefix $(SRC_DIR)/, $(SRCS_LIST)) includes/*.h || { echo "Oops! Norminette found some style issues."; exit 1; }
+	@echo "No norm error! ✅"
 
 
 .PHONY: all clean fclean re

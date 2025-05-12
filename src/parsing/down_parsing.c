@@ -31,7 +31,7 @@ int	down_parsing(t_game *info, int start)
 		if (width == -1)
 			return (-1);
 		if (info->player_count > 1)
-			return (error_msg("player_num != 1"));
+			return (error_msg("There must be only one player"));
 		if (width > info->map_w)
 			info->map_w = width;
 		start++;
